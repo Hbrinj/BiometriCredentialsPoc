@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'de.mannodermaus.android-junit5'
 }
 
 android {
@@ -25,6 +26,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        viewBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -65,6 +70,10 @@ dependencies {
     // Test
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
+    testImplementation "org.mockito:mockito-core:3.9.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:3.1.0"
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
 
     // Android Test
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

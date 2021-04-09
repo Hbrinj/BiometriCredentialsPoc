@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">BiometriCredentialsPoc</string>
+    <string name="app_name">Biometric Credentials PoC</string>
+
+    <!-- Main Strings -->
+    <string name="main_button_encrypt">Encrypt</string>
+    <string name="main_button_decrypt">Decrypt</string>
+
+    <!-- Encrypt strings -->
+    <string name="encrypt_info_msg">On this page you can enter a key and a value in\n the text box which will be encrypted and held based on your device credentials or biometrics</string>
+    <string name="encrypt_key_hint">Secret name</string>
+    <string name="encrypt_value_hint">Secret Message</string>
+
+    <!-- Decrypt strings -->
+
 </resources>

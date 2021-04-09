@@ -3,6 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/mainFragment">
 
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.hbrinj.biometricredentialspoc.features.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_encryptFragment"
+            app:destination="@id/encryptFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_decryptFragment"
+            app:destination="@id/decryptFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/encryptFragment"
+        android:name="com.hbrinj.biometricredentialspoc.features.encryptSecret.EncryptFragment"
+        android:label="EncryptFragment" />
+    <fragment
+        android:id="@+id/decryptFragment"
+        android:name="com.hbrinj.biometricredentialspoc.features.decryptSecret.DecryptFragment"
+        android:label="DecryptFragment" />
 </navigation>
