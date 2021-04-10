@@ -1,7 +1,8 @@
-package com.hbrinj.biometricredentialspoc
+package com.hbrinj.biometricredentialspoc.features.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.hbrinj.biometricredentialspoc.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

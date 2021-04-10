@@ -17,6 +17,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
     private lateinit var _binding: FragmentMainBinding
 
     private val binding get() = _binding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,7 +25,6 @@ class MainFragment: Fragment(R.layout.fragment_main) {
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater,container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,7 +2,7 @@ package com.hbrinj.biometricredentialspoc.features.main
 
 import androidx.lifecycle.Observer
 import com.hbrinj.biometricredentialspoc.InstantTaskExecutionExtension
-import com.hbrinj.biometricredentialspoc.application.architecture.Event
+import com.hbrinj.biometricredentialspoc.core.architecture.Event
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

@@ -9,6 +9,7 @@
     <string name="encrypt_info_msg">On this page you can enter a key and a value in\n the text box which will be encrypted and held based on your device credentials or biometrics</string>
     <string name="encrypt_key_hint">Secret name</string>
     <string name="encrypt_value_hint">Secret Message</string>
+    <string name="encrypt_button_title">Encrypt</string>
 
     <!-- Decrypt strings -->
 

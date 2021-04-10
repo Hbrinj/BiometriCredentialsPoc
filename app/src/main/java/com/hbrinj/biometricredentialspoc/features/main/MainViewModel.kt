@@ -3,7 +3,7 @@ package com.hbrinj.biometricredentialspoc.features.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hbrinj.biometricredentialspoc.application.architecture.Event
+import com.hbrinj.biometricredentialspoc.core.architecture.Event
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(): ViewModel() {

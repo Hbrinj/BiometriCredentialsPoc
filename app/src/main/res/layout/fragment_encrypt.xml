@@ -36,5 +36,14 @@
         app:layout_constraintRight_toRightOf="parent"
         android:hint="@string/encrypt_value_hint"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/encrypt_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/encrypt_secret"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/encrypt_button_title"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

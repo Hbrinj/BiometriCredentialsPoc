@@ -1,4 +1,4 @@
-package com.hbrinj.biometricredentialspoc.application.architecture
+package com.hbrinj.biometricredentialspoc.core.architecture
 
 
 open class DataEvent<T>(private val content: T) {
