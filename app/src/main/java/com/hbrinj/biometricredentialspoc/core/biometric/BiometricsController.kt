@@ -1,6 +1,7 @@
 package com.hbrinj.biometricredentialspoc.core.biometric
 
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
 import androidx.biometric.BiometricManager.BIOMETRIC_SUCCESS
@@ -10,7 +11,7 @@ class BiometricsController @Inject constructor(private val biometricManager: Bio
     val enrollmentState: EnrollmentState
         get() = determineEnrollmentState()
 
-    val allowedAuth = DEVICE_CREDENTIAL or BiometricManager.Authenticators.BIOMETRIC_WEAK
+    val allowedAuth = DEVICE_CREDENTIAL or BIOMETRIC_WEAK
 
     private fun determineEnrollmentState(): EnrollmentState {
         return when(biometricManager.canAuthenticate(allowedAuth)) {

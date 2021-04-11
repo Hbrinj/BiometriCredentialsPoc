@@ -7,7 +7,7 @@ import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-internal class PromptCallbackTest {
+internal class BiometricPromptCallbackTest {
 
     private val mockOnError: (Int, CharSequence) -> Unit = mock()
     private val mockOnFailure: () -> Unit = mock()

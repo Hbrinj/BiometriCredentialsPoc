@@ -42,7 +42,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         binding.mainButtonDecrypt.setOnClickListener { viewModel.decrypt() }
     }
 
-    private fun encrypt() = findNavController().navigate(R.id.encryptFragment)
+    private fun encrypt() = findNavController().navigate(R.id.action_mainFragment_to_encryptFragment)
 
-    private fun decrypt() = findNavController().navigate(R.id.decryptFragment)
+    private fun decrypt() = findNavController().navigate(R.id.action_mainFragment_to_decryptFragment)
 }

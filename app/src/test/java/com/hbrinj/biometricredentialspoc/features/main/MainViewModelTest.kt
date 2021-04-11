@@ -3,6 +3,7 @@ package com.hbrinj.biometricredentialspoc.features.main
 import androidx.lifecycle.Observer
 import com.hbrinj.biometricredentialspoc.InstantTaskExecutionExtension
 import com.hbrinj.biometricredentialspoc.core.architecture.Event
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -33,7 +34,7 @@ internal class MainViewModelTest {
         sut.encrypt()
 
         // Then
-        verify(encryptEventObserver, times(1)).onChanged(any())
+        verify(encryptEventObserver).onChanged(any())
     }
 
     @Test
@@ -44,6 +45,13 @@ internal class MainViewModelTest {
         sut.decrypt()
 
         // Then
-        verify(decryptEventObserver, times(1)).onChanged(any())
+        verify(decryptEventObserver).onChanged(any())
+    }
+
+    @AfterEach
+    fun check() {
+        validateMockitoUsage()
+        sut.encryptDataEvent.removeObserver(encryptEventObserver)
+        sut.decryptDataEvent.removeObserver(decryptEventObserver)
     }
 }

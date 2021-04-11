@@ -10,7 +10,12 @@
     <string name="encrypt_key_hint">Secret name</string>
     <string name="encrypt_value_hint">Secret Message</string>
     <string name="encrypt_button_title">Encrypt</string>
+    <string name="encrypt_prompt_title">Authentication for decryption</string>
+    <string name="encrypt_prompt_subtitle">Decrypt using your credentials</string>
 
     <!-- Decrypt strings -->
-
+    <string name="decrypt_key_hint">Encrypted Message Key</string>
+    <string name="decrypt_button_title">Decrypt</string>
+    <string name="decrypt_prompt_title">Authentication for decryption</string>
+    <string name="decrypt_prompt_subtitle">Decrypt using your credentials</string>
 </resources>

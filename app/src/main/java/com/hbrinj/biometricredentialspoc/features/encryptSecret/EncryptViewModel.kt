@@ -4,61 +4,56 @@ import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hbrinj.biometricredentialspoc.core.architecture.DataEvent
 import com.hbrinj.biometricredentialspoc.core.architecture.Event
 import com.hbrinj.biometricredentialspoc.core.biometric.BiometricPromptCallback
+import com.hbrinj.biometricredentialspoc.core.biometric.BiometricSharedPreferencesController
 import com.hbrinj.biometricredentialspoc.core.biometric.BiometricsController
 import com.hbrinj.biometricredentialspoc.core.biometric.EnrollmentState
 import com.hbrinj.biometricredentialspoc.core.crypto.SecretController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 @HiltViewModel
 class EncryptViewModel @Inject constructor(
-    private val biometricsController: BiometricsController,
-    private val secretController: SecretController
-): ViewModel() {
-    private val _eligibilityEvent = MutableLiveData<DataEvent<EligibilityEvent>>()
-    val eligibilityEvent: LiveData<DataEvent<EligibilityEvent>> = _eligibilityEvent
+    biometricsController: BiometricsController,
+    private val secretController: SecretController,
+    private val biometricSharedPreferencesController: BiometricSharedPreferencesController
+): BiometricViewModel(biometricsController) {
 
-    private val _promptEvent = MutableLiveData<DataEvent<PromptEvent>>()
-    val promptEvent: LiveData<DataEvent<PromptEvent>> = _promptEvent
+    private var keyName: CharSequence = ""
+    private var secretMessage: CharSequence = ""
 
-    fun checkEligibilityAndPrompt() {
-        when(biometricsController.enrollmentState) {
-            EnrollmentState.CanEnroll -> _eligibilityEvent.postValue(DataEvent(EligibilityEvent.CanEnroll))
-            EnrollmentState.Enrolled -> {
-                //TODO: this needs a test to verify its correct
-                val callback = BiometricPromptCallback(this::onPromptSuccess, this::onPromptFailure, this:: onPromptError)
-                _eligibilityEvent.postValue(DataEvent(EligibilityEvent.Prompt(callback)))
-            }
-            EnrollmentState.NotAvailable -> _eligibilityEvent.postValue(DataEvent(EligibilityEvent.NotAvailable))
+    fun keyNameChanged(text: CharSequence?) {
+        text?.let {
+            keyName = it
         }
     }
 
-    private fun onPromptSuccess(result: BiometricPrompt.AuthenticationResult) {
-        val secret = secretController.encryptData("hello".toByteArray())
-        //save to shared preferences
-        _promptEvent.postValue(DataEvent(PromptEvent.Successful))
+    fun secretMessageChanged(text: CharSequence?) {
+        text?.let {
+            secretMessage = it
+        }
     }
 
-    private fun onPromptFailure() {
-        _promptEvent.postValue(DataEvent(PromptEvent.Failure))
+    override fun onPromptSuccess(result: BiometricPrompt.AuthenticationResult) {
+        encryptSecret()
+        super.onPromptSuccess(result)
     }
 
-    private fun onPromptError(errorCode: Int, errorMessage: CharSequence) {
-        _promptEvent.postValue(DataEvent(PromptEvent.Error))
+    private fun encryptSecret() {
+        viewModelScope.launch {
+            secretController.encryptData(secretMessage.toString().toByteArray())
+                ?.let { encryptedMessage ->
+                    biometricSharedPreferencesController.saveEncryptedMessage(
+                        keyName.toString(),
+                        encryptedMessage
+                    )
+                } // Do something here if this failed and returned a null
+        }
     }
-}
-
-sealed class PromptEvent {
-    object Successful: PromptEvent()
-    object Failure: PromptEvent()
-    object Error: PromptEvent()
-}
-
-sealed class EligibilityEvent {
-    object CanEnroll : EligibilityEvent()
-    object NotAvailable : EligibilityEvent()
-    data class Prompt(val callback: BiometricPromptCallback): EligibilityEvent()
 }
